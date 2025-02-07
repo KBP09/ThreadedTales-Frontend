@@ -9,7 +9,8 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { BookOpen, User, Mail, Lock } from "lucide-react"
 import { signup } from "@/actions/auth/signup.action"
 import { useToast } from "@/hooks/use-toast"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 export default function SignupPage() {
   const [name, setName] = useState("");
@@ -47,81 +48,104 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="container mx-auto py-12 flex justify-center items-center min-h-screen">
-      <Card className="w-full max-w-md bg-gray-800 border-yellow-500">
-        <CardHeader>
-          <div className="flex justify-center mb-4">
-            <BookOpen className="h-12 w-12 text-yellow-500" />
-          </div>
-          <CardTitle className="text-2xl font-bold text-center gradient-text">Join Threaded Tales</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name" className="text-yellow-500">
-                Name
-              </Label>
-              <div className="relative">
-                <Input
-                  id="name"
-                  type="text"
-                  placeholder="Enter your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="bg-gray-700 text-white pl-10"
-                  required
-                />
-                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500 h-5 w-5" />
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <div className="text-center">
+          <BookOpen className="mx-auto h-12 w-12 text-yellow-500" />
+          <h2 className="mt-6 text-3xl font-extrabold gradient-text">Join Threaded Tales</h2>
+        </div>
+        <Card className="bg-gray-800 border-yellow-500">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-center text-yellow-500">Create your account</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <Label htmlFor="name" className="text-yellow-500">
+                  Full name
+                </Label>
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <User className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    autoComplete="name"
+                    required
+                    className="bg-gray-700 text-white pl-10"
+                    placeholder="John Doe"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-yellow-500">
-                Email
-              </Label>
-              <div className="relative">
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-gray-700 text-white pl-10"
-                  required
-                />
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500 h-5 w-5" />
+
+              <div>
+                <Label htmlFor="email" className="text-yellow-500">
+                  Email address
+                </Label>
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Mail className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    className="bg-gray-700 text-white pl-10"
+                    placeholder="you@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-yellow-500">
-                Password
-              </Label>
-              <div className="relative">
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Create a password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="bg-gray-700 text-white pl-10"
-                  required
-                />
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500 h-5 w-5" />
+
+              <div>
+                <Label htmlFor="password" className="text-yellow-500">
+                  Password
+                </Label>
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Lock className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <Input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="new-password"
+                    required
+                    className="bg-gray-700 text-white pl-10"
+                    placeholder="Create a strong password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
               </div>
-            </div>
-            <Button type="submit" className="w-full gradient-bg text-black">
-              Sign Up
-            </Button>
-          </form>
-        </CardContent>
-        <CardFooter className="justify-center">
-          <p className="text-gray-400">
-            Already have an account?{" "}
-            <Link href="/login" className="text-yellow-500 hover:underline">
-              Login here
-            </Link>
-          </p>
-        </CardFooter>
-      </Card>
+
+              <div>
+                <Button type="submit" className="w-full gradient-bg text-black">
+                  Sign up
+                </Button>
+              </div>
+            </form>
+          </CardContent>
+          <CardFooter className="justify-center">
+            <p className="text-gray-400">
+              Already have an account?{" "}
+              <Link href="/login" className="text-yellow-500 hover:text-yellow-400">
+                Sign in
+              </Link>
+            </p>
+          </CardFooter>
+        </Card>
+      </div>
+      <div className="hidden lg:block fixed left-0 top-0 w-1/2 h-full">
+        <Image src="/images/signup-background.jpg" alt="Signup background" layout="fill" objectFit="cover" />
+      </div>
     </div>
   )
 }
