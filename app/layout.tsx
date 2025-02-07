@@ -3,7 +3,7 @@ import { Inter } from "next/font/google"
 import Header from "@/components/Header/Header"
 import Footer from "@/components/Footer/footer"
 import type React from "react"
-
+import { NetworkProvider } from "@/store/NetworkProvider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
@@ -21,7 +21,9 @@ export default function RootLayout({
       <body className={`${inter.className} bg-[#0a0a0a] text-white min-h-screen flex flex-col`}>
         <div className="fixed inset-0 bg-[url('/images/dark-texture.png')] opacity-10 z-0"></div>
         <Header />
-        <main className="flex-grow relative z-10">{children}</main>
+        <NetworkProvider>
+          <main className="flex-grow relative z-10">{children}</main>
+        </NetworkProvider>
         <Footer />
       </body>
     </html>

@@ -7,15 +7,25 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { BookOpen, User, Mail, Lock } from "lucide-react"
+import { signup } from "@/actions/auth/signup.action"
 
 export default function SignupPage() {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Here you would typically handle the signup logic
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    await signup({
+      name:name,
+      email:email,
+      password:password
+    }).then((response)=>{
+      setLoading(false);
+      console.log(response);
+    })
     console.log("Signup attempt:", { name, email, password })
   }
 
