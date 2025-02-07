@@ -30,9 +30,16 @@ export default function Header() {
               Create
             </Link>
           </nav>
-          <Button variant="outline" className="bg-yellow-500 text-black hover:bg-yellow-600">
-            Sign In
-          </Button>
+          <Link href="/login">
+            <Button variant="outline" className="bg-yellow-500 text-black hover:bg-yellow-600">
+              Sign In
+            </Button>
+          </Link>
+          <Link href="/signup">
+            <Button variant="ghost" className="text-yellow-500 hover:text-yellow-600">
+              Sign Up
+            </Button>
+          </Link>
           <Link href="/profile">
             <Button variant="ghost" className="text-yellow-500 hover:text-yellow-600">
               <User />

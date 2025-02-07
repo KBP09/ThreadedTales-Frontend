@@ -31,7 +31,7 @@ const userStories = [
   },
 ]
 
-export default function ProfilePage() {
+export default function Page() {
   const [activeTab, setActiveTab] = useState("stories")
 
   return (
