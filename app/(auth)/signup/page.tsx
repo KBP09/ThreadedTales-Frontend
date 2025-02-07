@@ -8,23 +8,40 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { BookOpen, User, Mail, Lock } from "lucide-react"
 import { signup } from "@/actions/auth/signup.action"
+import { useToast } from "@/hooks/use-toast"
+import { useRouter } from "next/router"
 
 export default function SignupPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     await signup({
-      name:name,
-      email:email,
-      password:password
-    }).then((response)=>{
+      name: name,
+      email: email,
+      password: password
+    }).then((response) => {
       setLoading(false);
+      toast({
+        title: "Success",
+        description: "Email verified successfully. Please login."
+      })
       console.log(response);
+      router.push('/login')
+    }).catch((error) => {
+      console.log(error);
+      toast({
+        title: "Error",
+        description: "OTP verification failed",
+        variant: "destructive",
+      });
+      return router.push('/signup');
     })
     console.log("Signup attempt:", { name, email, password })
   }

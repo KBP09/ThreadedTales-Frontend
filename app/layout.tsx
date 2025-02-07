@@ -4,6 +4,7 @@ import Header from "@/components/Header/Header"
 import Footer from "@/components/Footer/footer"
 import type React from "react"
 import { NetworkProvider } from "@/store/NetworkProvider"
+import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
@@ -24,6 +25,7 @@ export default function RootLayout({
         <NetworkProvider>
           <main className="flex-grow relative z-10">{children}</main>
         </NetworkProvider>
+        <Toaster />
         <Footer />
       </body>
     </html>
