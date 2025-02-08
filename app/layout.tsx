@@ -14,8 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-
-  // Routes where the header and footer are not displayed
+  
   const noHeaderFooterRoutes = ["/", "/signup", "/login"];
   const showHeaderFooter = !noHeaderFooterRoutes.includes(pathname);
 

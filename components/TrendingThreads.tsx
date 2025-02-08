@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Heart, MessageCircle } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 const trendingThreads = [
   {
@@ -36,6 +37,13 @@ const trendingThreads = [
 ]
 
 export default function TrendingThreads() {
+  const router = useRouter()
+
+  const handleCardClick = (id: number) => {
+    // Navigate to the thread's page based on the thread id
+    router.push(`/thread`)
+  }
+
   return (
     <section>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -46,7 +54,10 @@ export default function TrendingThreads() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <Card className="bg-gray-800 hover:bg-gray-700 transition-colors overflow-hidden group">
+            <Card
+              className="bg-gray-800 hover:bg-gray-700 transition-colors overflow-hidden group cursor-pointer"
+              onClick={() => handleCardClick(thread.id)}
+            >
               <CardHeader className="p-0">
                 <Image
                   src={thread.image || "/placeholder.svg"}
@@ -84,4 +95,3 @@ export default function TrendingThreads() {
     </section>
   )
 }
-
