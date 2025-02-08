@@ -55,7 +55,7 @@ const storyData: Story = {
   }
 }
 
-export default function Page({ params }: { params: { id: string } }) {
+export default function Page() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null)
 
