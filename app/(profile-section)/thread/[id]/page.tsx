@@ -7,31 +7,7 @@ import { Heart, MessageCircle, Plus } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import ContributionModal from "@/components/ContributionModal"
 import axios from "axios"
-
-interface Node {
-  id: string
-  title: string
-  content: string
-  userId: string
-  parentId: string | null
-  createdAt: string
-  updatedAt: string
-  children: Node[]
-}
-
-interface Story {
-  id: string
-  title: string
-  content: string
-  userId: string
-  parentId: string | null
-  createdAt: string
-  updatedAt: string
-  children: Node[]
-  createdBy: {
-    name: string
-  }
-}
+import { Story, Node } from "@/types/types"
 
 export default function Page({ params }: { params: { id: string } }) {
   const [storyData, setStoryData] = useState<Story | null>(null)
@@ -101,7 +77,6 @@ export default function Page({ params }: { params: { id: string } }) {
       </h1>
       <p className="text-xl text-gray-400 mb-8">by {storyData.createdBy.name}</p>
 
-      {/* Render the root nodes */}
       {renderNodes(storyData.children)}
 
       <ContributionModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} nodeId={selectedNodeId} />

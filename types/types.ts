@@ -1,12 +1,3 @@
-export interface Story {
-    id: string;
-    title: string;
-    content: string;
-    likeCount: number;
-    createdAt: string;
-    updatedAt: string;
-}
-
 export interface SocialLinks {
     twitter?: string | null;
     facebook?: string | null;
@@ -23,6 +14,31 @@ export interface User {
     updatedAt: string;
     stories: Story[];
     accessToken: string;
+}
+
+export interface Node {
+    id: string
+    title: string
+    content: string
+    userId: string
+    parentId: string | null
+    createdAt: string
+    updatedAt: string
+    children: Node[]
+}
+
+export interface Story {
+    id: string
+    title: string
+    content: string
+    userId: string
+    parentId: string | null
+    createdAt: string
+    updatedAt: string
+    children: Node[]
+    createdBy: {
+        name: string
+    }
 }
 
 export interface NetworkContextType {
