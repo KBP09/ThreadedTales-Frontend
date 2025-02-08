@@ -5,23 +5,56 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Upload } from "lucide-react"
+import Web3 from "web3"
+import axios from "axios"
+
+const web3 = new Web3(window.ethereum);
 
 export default function Page() {
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
-  const [image, setImage] = useState<File | null>(null)
+  const [royalty, setRoyalty] = useState<number>(5)
+  const [userAddress, setUserAddress] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setImage(e.target.files[0])
+  const connectWallet = async () => {
+    try {
+      await window.ethereum.request({ method: "eth_requestAccounts" })
+      const accounts = await web3.eth.getAccounts()
+      setUserAddress(accounts[0])
+      alert(`Wallet connected: ${accounts[0]}`)
+    } catch (error) {
+      console.error("Wallet connection failed", error)
+      alert("Failed to connect wallet")
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the data to your backend
-    console.log("Submitting story:", { title, content, image })
+
+    if (!userAddress) {
+      alert("Please connect your wallet first.")
+      return
+    }
+
+    setLoading(true)
+    try {
+      const payload = {
+        userAddress,
+        storyAddress: "threaded_tales_stories",
+        storyName: title,
+        royaltyPercentage: royalty,
+        content,
+      }
+
+      const response = await axios.post('http://localhost:5000/api/create/', payload)
+      alert(`Story created successfully! Transaction Hash: ${response.data.transactionHash}`)
+    } catch (error) {
+      console.error("Error creating story:", error)
+      alert("Failed to create the story. Please try again.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -51,25 +84,27 @@ export default function Page() {
           />
         </div>
         <div>
-          <Label htmlFor="image">Cover Image</Label>
-          <div className="flex items-center space-x-4">
-            <Input
-              id="image"
-              type="file"
-              onChange={handleImageChange}
-              className="bg-gray-800 text-white"
-              accept="image/*"
-            />
-            <Button type="button" variant="outline" className="text-yellow-500">
-              <Upload className="mr-2 h-4 w-4" /> Upload
-            </Button>
-          </div>
+          <Label htmlFor="royalty">Royalty Percentage (5% to 25%)</Label>
+          <Input
+            id="royalty"
+            type="number"
+            value={royalty}
+            onChange={(e) => setRoyalty(parseInt(e.target.value, 10))}
+            min={5}
+            max={25}
+            className="bg-gray-800 text-white"
+            required
+          />
         </div>
-        <Button type="submit" className="gradient-bg text-black">
-          Create Story
-        </Button>
+        <div className="flex gap-4">
+          <Button type="button" onClick={connectWallet} variant="outline" className="w-40">
+            {userAddress ? "Wallet Connected" : "Connect Wallet"}
+          </Button>
+          <Button type="submit" className="gradient-bg text-black" disabled={loading}>
+            {loading ? "Creating Story..." : "Create Story"}
+          </Button>
+        </div>
       </form>
     </div>
   )
 }
-

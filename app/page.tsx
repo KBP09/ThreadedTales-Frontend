@@ -6,14 +6,9 @@ import { BookOpen, Feather, Users, Sparkles } from "lucide-react"
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
-      <header className="container mx-auto py-4 flex justify-between items-center">
+      <header className="container mx-auto px-4 sm:px-8 lg:px-16 py-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
-          <Image
-            src="/logo.svg"
-            width={200}
-            height={200}
-            alt=""
-          />
+          <Image src="/logo.svg" width={200} height={200} alt="" />
         </div>
         <nav className="space-x-4">
           <Link href="/login" className="text-yellow-500 hover:text-yellow-400">
@@ -30,29 +25,30 @@ export default function LandingPage() {
         </nav>
       </header>
 
-      <main className="container mx-auto py-4">
+      <main className="container mx-auto px-4 sm:px-8 lg:px-16 py-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
-            <h1 className="text-5xl font-bold leading-tight gradient-text">
+            <h1 className="text-5xl font-bold text-center sm:text-left leading-tight gradient-text">
               Weave Your Stories, Connect Through Words
             </h1>
-            <p className="text-xl text-gray-300">
+            <p className="text-xl text-center sm:text-left text-gray-300">
               Join Threaded Tales, where every story is a collaborative journey. Create, continue, and explore
               narratives that span across imaginations.
             </p>
-            <div className="space-x-4">
-              <Button asChild size="lg" className="gradient-bg text-black">
+            <div className="space-x-0 space-y-4 sm:space-y-0 sm:space-x-4 flex flex-col sm:flex-row">
+              <Button asChild size="lg" className="gradient-bg text-black w-full sm:w-auto">
                 <Link href="/home">Start Your Journey</Link>
               </Button>
               <Button
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black"
+                className="border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black w-full sm:w-auto"
               >
                 <Link href="/explore">Explore Stories</Link>
               </Button>
             </div>
+
           </div>
           <div className="relative h-96 rounded-lg overflow-hidden shadow-2xl">
             <Image
@@ -86,7 +82,7 @@ export default function LandingPage() {
         </div>
       </main>
 
-      <footer className="bg-gray-900 py-8 mt-16">
+      <footer className="bg-gray-900 py-8 mt-16 px-4 sm:px-8 lg:px-16">
         <div className="container mx-auto text-center text-gray-400">
           <p>&copy; 2023 Threaded Tales. All rights reserved.</p>
         </div>
@@ -94,4 +90,3 @@ export default function LandingPage() {
     </div>
   )
 }
-
