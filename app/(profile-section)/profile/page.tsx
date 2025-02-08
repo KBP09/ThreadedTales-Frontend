@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -33,6 +33,15 @@ const userStories = [
 
 export default function Page() {
   const [activeTab, setActiveTab] = useState("stories")
+  const [userName, setUserName] = useState<string | null>("Jane Doe")
+
+  useEffect(() => {
+    const userAccount = localStorage.getItem("userAccounts")
+    if (userAccount) {
+      const parsedData = JSON.parse(userAccount)
+      setUserName(parsedData.name || "Jane Doe")
+    }
+  }, [])
 
   return (
     <div className="container mx-auto py-12">
@@ -46,7 +55,7 @@ export default function Page() {
             className="rounded-full"
           />
           <div>
-            <h1 className="text-4xl font-bold gradient-text">Jane Doe</h1>
+            <h1 className="text-4xl font-bold gradient-text">{userName}</h1>
             <p className="text-gray-400">Storyteller Extraordinaire</p>
           </div>
         </div>

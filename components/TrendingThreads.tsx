@@ -13,7 +13,7 @@ const trendingThreads = [
     likes: 1200,
     comments: 89,
     genres: ["Sci-Fi", "Mystery"],
-    image: "https://source.unsplash.com/random/800x600?sci-fi",
+    image: "/quantum.jpeg",
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const trendingThreads = [
     likes: 980,
     comments: 65,
     genres: ["Fantasy", "Adventure"],
-    image: "https://source.unsplash.com/random/800x600?fantasy",
+    image: "/quantum.jpeg",
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const trendingThreads = [
     likes: 1500,
     comments: 112,
     genres: ["Romance", "Drama"],
-    image: "https://source.unsplash.com/random/800x600?romance",
+    image: "/quantum.jpeg",
   },
 ]
 
