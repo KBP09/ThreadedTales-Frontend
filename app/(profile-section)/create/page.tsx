@@ -14,46 +14,12 @@ export default function Page() {
   const [royalty, setRoyalty] = useState<number>(5)
   const [userAddress, setUserAddress] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
-  const [user, setUser] = useState<User | null>(null);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-
-    if (!userAddress) {
-      alert("Please connect your wallet first.")
-      return
-    }
-
-    setLoading(true)
-    try {
-      const userData = localStorage.getItem("userAccounts");
-      if (userData) {
-        setUser(JSON.parse(userData));
-      }
-      const payload = {
-        userAddress,
-        storyAddress: "threaded_tales_stories",
-        storyName: title,
-        royaltyPercentage: royalty,
-        content,
-        userId:user?.id,
-        title
-      }
-
-      const response = await axios.post('http://localhost:5000/api/create/', payload)
-      alert(`Story created successfully! Transaction Hash: ${response.data.transactionHash}`)
-    } catch (error) {
-      console.error("Error creating story:", error)
-      alert("Failed to create the story. Please try again.")
-    } finally {
-      setLoading(false)
-    }
-  }
+  const [user, setUser] = useState<User | null>(null)
 
   return (
-    <div className="container mx-auto py-12">
+    <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-16">
       <h1 className="text-4xl font-bold mb-8 gradient-text">Create a New Story</h1>
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form className="space-y-6">
         <div>
           <Label htmlFor="title">Title</Label>
           <Input
@@ -89,12 +55,12 @@ export default function Page() {
             required
           />
         </div>
-        <div className="flex gap-4">
-          <Button type="button" variant="outline" className="w-40">
-            {userAddress ? "Wallet Connected" : "Connect Wallet"}
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Button type="button" variant="outline" className="w-full sm:w-40">
+            Connect Wallet
           </Button>
-          <Button type="submit" className="gradient-bg text-black" disabled={loading}>
-            {loading ? "Creating Story..." : "Create Story"}
+          <Button type="submit" className="gradient-bg text-black w-full sm:w-auto" >
+           Create Story
           </Button>
         </div>
       </form>

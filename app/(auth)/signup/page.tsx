@@ -11,38 +11,52 @@ import { signup } from "@/actions/auth/signup.action"
 import { useToast } from "@/hooks/use-toast"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
+import { useEffect } from "react"
 
 export default function SignupPage() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const { toast } = useToast();
-  const router = useRouter();
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+  const { toast } = useToast()
+  const router = useRouter()
+
+
+  useEffect(() => {
+    toast({
+      title: "Backend disconnected",
+      description: "The backend is currently unavailable. You will be redirected to the home page.",
+      variant: "destructive"
+    })
+    setTimeout(() => {
+      router.push("/home")
+    }, 3000) 
+  }, [toast, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault()
+    setLoading(true)
+
     await signup({
       name: name,
       email: email,
       password: password
     }).then((response) => {
-      setLoading(false);
+      setLoading(false)
       toast({
         title: "Success",
         description: "Email verified successfully. Please login."
       })
-      console.log(response);
+      console.log(response)
       router.push('/login')
     }).catch((error) => {
-      console.log(error);
+      console.log(error)
       toast({
         title: "Error",
         description: "OTP verification failed",
         variant: "destructive",
-      });
-      return router.push('/signup');
+      })
+      setLoading(false)
     })
     console.log("Signup attempt:", { name, email, password })
   }
@@ -132,8 +146,8 @@ export default function SignupPage() {
               </div>
 
               <div>
-                <Button type="submit" className="w-full gradient-bg text-black">
-                  Sign up
+                <Button type="submit" className="w-full gradient-bg text-black" disabled={loading}>
+                  {loading ? "Signing up..." : "Sign up"}
                 </Button>
               </div>
             </form>
@@ -151,4 +165,3 @@ export default function SignupPage() {
     </div>
   )
 }
-

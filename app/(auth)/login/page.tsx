@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -16,31 +16,43 @@ import Image from "next/image"
 export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [loading, setLoading] = useState(false);
-  const networkContext = useNetwork();
-  const { toast } = useToast();
-  const router = useRouter();
+  const [loading, setLoading] = useState(false)
+  const networkContext = useNetwork()
+  const { toast } = useToast()
+  const router = useRouter()
+
+  // Show a toast when the page loads
+  useEffect(() => {
+    toast({
+      title: "Backend disconnected",
+      description: "The backend is currently unavailable. You will be redirected to the home page.",
+      variant: "destructive"
+    })
+    setTimeout(() => {
+      router.push("/home")
+    }, 3000) // Delay before redirecting to home page
+  }, [toast, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true);
+    setLoading(true)
     await login({
       email,
       password
     }).then((response) => {
-      setLoading(false);
-      networkContext?.setCurrentUser(response.user);
-      const accessToken = response.accessToken;
-      localStorage.setItem("accessToken", accessToken);
+      setLoading(false)
+      networkContext?.setCurrentUser(response.user)
+      const accessToken = response.accessToken
+      localStorage.setItem("accessToken", accessToken)
       router.push('/home')
     }).catch((error) => {
-      console.log(error);
+      console.log(error)
       toast({
         title: "Error",
-        description: "An error occured",
+        description: "An error occurred",
         variant: "destructive"
       })
-      setLoading(false);
+      setLoading(false)
     })
     console.log("Login attempt:", { email, password })
   }
@@ -127,4 +139,3 @@ export default function LoginPage() {
     </div>
   )
 }
-

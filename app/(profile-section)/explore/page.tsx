@@ -107,7 +107,7 @@ export default function ExplorePage() {
       transition={{ duration: 0.5 }}
       className="mb-4"
     >
-      <Link href={`/thread/${thread.id}`}>
+      <Link href={`/thread/`}>
         <Card className="bg-gray-800 hover:bg-gray-700 transition-colors overflow-hidden cursor-pointer">
           <CardHeader className="gradient-bg">
             <CardTitle className="text-white">{thread.title}</CardTitle>
@@ -126,25 +126,26 @@ export default function ExplorePage() {
   )
 
   return (
-    <div className="container mx-auto py-12">
-      <h1 className="text-4xl font-bold mb-8 gradient-text">Explore Threads</h1>
-
-      <div className="mb-8 flex items-center">
-        <Input
-          type="text"
-          placeholder="Search threads..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="mr-4 bg-gray-800 text-white"
-        />
-        <Button className="gradient-bg">
-          <Search className="w-4 h-4 mr-2" /> Search
-        </Button>
-      </div>
-
-      <div className="grid grid-cols-2 gap-8">
-        {threads.map(renderThread)}
-      </div>
+    <div className="container mx-auto py-12 px-4 sm:px-6 md:px-8">
+    <h1 className="text-4xl font-bold mb-8 gradient-text">Explore Threads</h1>
+  
+    <div className="mb-8 flex items-center">
+      <Input
+        type="text"
+        placeholder="Search threads..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="mr-4 bg-gray-800 text-white"
+      />
+      <Button className="gradient-bg">
+        <Search className="w-4 h-4 mr-2" /> Search
+      </Button>
     </div>
+  
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+      {threads.map(renderThread)}
+    </div>
+  </div>
+  
   )
 }
