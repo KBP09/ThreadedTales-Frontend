@@ -48,7 +48,7 @@ export default function Page() {
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center space-x-4">
           <Image
-            src="https://source.unsplash.com/random/200x200?portrait"
+            src="/user.jpeg"
             alt="Profile Picture"
             width={100}
             height={100}

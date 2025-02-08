@@ -22,7 +22,7 @@ const trendingThreads = [
     likes: 980,
     comments: 65,
     genres: ["Fantasy", "Adventure"],
-    image: "/quantum.jpeg",
+    image: "/echoes.jpeg",
   },
   {
     id: 3,

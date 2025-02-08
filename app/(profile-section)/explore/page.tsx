@@ -47,20 +47,21 @@ export default function ExplorePage() {
       transition={{ duration: 0.5 }}
       className="mb-4"
     >
-      <Card className="bg-gray-800 hover:bg-gray-700 transition-colors overflow-hidden cursor-pointer">
-        <CardHeader className="gradient-bg">
-          <CardTitle className="text-white">{thread.title}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-gray-400">{thread.content}</p>
-          <p className="text-sm text-gray-500 mt-2">Created by {thread.createdBy?.name || "Unknown"}</p>
-        </CardContent>
-        {thread.children && thread.children.length > 0 && (
-          <CardFooter className="ml-6 border-l border-gray-600">
-            {thread.children.map(renderThread)}
-          </CardFooter>
-        )}
-      </Card>
+      <Link href={`/thread/${thread.id}`}>
+        <Card className="bg-gray-800 hover:bg-gray-700 transition-colors overflow-hidden cursor-pointer">
+          <CardHeader className="gradient-bg">
+            <CardTitle className="text-white">{thread.title}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="mt-4 text-sm text-gray-500">Created by {thread.createdBy?.name || "Unknown"}</p>
+          </CardContent>
+          {thread.children && thread.children.length > 0 && (
+            <CardFooter className="ml-6 border-l border-gray-600">
+              {thread.children.map(renderThread)}
+            </CardFooter>
+          )}
+        </Card>
+      </Link>
     </motion.div>
   )
 

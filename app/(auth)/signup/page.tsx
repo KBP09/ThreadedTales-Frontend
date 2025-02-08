@@ -50,9 +50,14 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <BookOpen className="mx-auto h-12 w-12 text-yellow-500" />
-          <h2 className="mt-6 text-3xl font-extrabold gradient-text">Join Threaded Tales</h2>
+        <div className="flex items-center flex-col text-center">
+          <Image
+            src="/logo.svg"
+            width={200}
+            height={200}
+            alt=""
+          />
+          <h2 className="text-3xl font-extrabold gradient-text">Join Threaded Tales</h2>
         </div>
         <Card className="bg-gray-800 border-yellow-500">
           <CardHeader>

@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Search, BookOpen, User } from "lucide-react"
-
+import Image from "next/image"
 export default function Header() {
   const pathname = usePathname()
   const isLandingPage = pathname === "/"
@@ -14,10 +14,13 @@ export default function Header() {
     <header className="border-b border-gray-800 py-4 bg-black bg-opacity-30 backdrop-blur-md">
       <div className="container mx-auto flex items-center justify-between">
         <Link href="/" className="text-2xl font-bold flex items-center">
-          <BookOpen className="mr-2 text-amber-500" />
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-500 via-yellow-500 to-orange-500">
-            Threaded Tales
-          </span>
+          <Image
+            src="/logo.svg"
+            width={100}
+            height={100}
+            alt=""
+          />
+
         </Link>
         <div className="flex items-center space-x-4">
           {!isLandingPage && (
@@ -42,9 +45,15 @@ export default function Header() {
                 </Link>
               </nav>
               <Link href="/profile">
-                <Button variant="ghost" className="text-amber-500 hover:text-amber-600">
-                  <User />
-                </Button>
+
+                <Image
+                  src="/user.jpeg"
+                  alt="Profile Picture"
+                  width={40}
+                  height={40}
+                  className="rounded-full"
+                />
+
               </Link>
             </>
           )}

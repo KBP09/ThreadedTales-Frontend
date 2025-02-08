@@ -44,6 +44,12 @@ export default function Page() {
         </div>
       </motion.section>
       <TrendingThreads />
+      <div className="mt-8">
+      <TrendingThreads />
+      </div>
+      <div className="mt-8">
+      <TrendingThreads />
+      </div>
     </div>
   )
 }

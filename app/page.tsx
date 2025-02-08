@@ -6,10 +6,14 @@ import { BookOpen, Feather, Users, Sparkles } from "lucide-react"
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
-      <header className="container mx-auto py-8 flex justify-between items-center">
+      <header className="container mx-auto py-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
-          <BookOpen className="h-8 w-8 text-yellow-500" />
-          <span className="text-2xl font-bold gradient-text">Threaded Tales</span>
+          <Image
+            src="/logo.svg"
+            width={200}
+            height={200}
+            alt=""
+          />
         </div>
         <nav className="space-x-4">
           <Link href="/login" className="text-yellow-500 hover:text-yellow-400">
@@ -26,7 +30,7 @@ export default function LandingPage() {
         </nav>
       </header>
 
-      <main className="container mx-auto py-16">
+      <main className="container mx-auto py-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <h1 className="text-5xl font-bold leading-tight gradient-text">
@@ -52,7 +56,7 @@ export default function LandingPage() {
           </div>
           <div className="relative h-96 rounded-lg overflow-hidden shadow-2xl">
             <Image
-              src="/images/storytelling.jpg"
+              src="/quantum.jpeg"
               alt="Storytelling"
               layout="fill"
               objectFit="cover"
@@ -72,12 +76,12 @@ export default function LandingPage() {
           <div className="bg-gray-800 p-6 rounded-lg text-center">
             <Users className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
             <h3 className="text-xl font-semibold mb-2">Collaborate</h3>
-            <p className="text-gray-400">Join forces with other writers to create intricate, branching narratives.</p>
+            <p className="text-purple-300">Join forces with other writers to create intricate, branching narratives.</p>
           </div>
           <div className="bg-gray-800 p-6 rounded-lg text-center">
             <Sparkles className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
             <h3 className="text-xl font-semibold mb-2">Discover</h3>
-            <p className="text-gray-400">Explore a vast library of user-generated stories across all genres.</p>
+            <p className="text-purple-300">Explore a vast library of user-generated stories across all genres.</p>
           </div>
         </div>
       </main>
