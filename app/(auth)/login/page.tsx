@@ -124,9 +124,6 @@ export default function LoginPage() {
           </CardFooter>
         </Card>
       </div>
-      <div className="hidden lg:block fixed right-0 top-0 w-1/2 h-full">
-        <Image src="/abv" alt="Login background" layout="fill" objectFit="cover" />
-      </div>
     </div>
   )
 }

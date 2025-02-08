@@ -31,14 +31,13 @@ const trendingThreads = [
     likes: 1500,
     comments: 112,
     genres: ["Romance", "Drama"],
-    image: "/quantum.jpeg",
+    image: "/wind.jpg",
   },
 ]
 
 export default function TrendingThreads() {
   return (
     <section>
-      <h2 className="text-3xl font-bold mb-8 gradient-text">Trending Threads</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {trendingThreads.map((thread, index) => (
           <motion.div

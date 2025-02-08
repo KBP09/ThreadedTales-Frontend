@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import Web3 from "web3"
 import axios from "axios"
+import { User } from "@/types/types"
 
 const web3 = new Web3(window.ethereum);
 
@@ -16,6 +17,7 @@ export default function Page() {
   const [royalty, setRoyalty] = useState<number>(5)
   const [userAddress, setUserAddress] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const [user, setUser] = useState<User | null>(null);
 
   const connectWallet = async () => {
     try {
@@ -39,12 +41,18 @@ export default function Page() {
 
     setLoading(true)
     try {
+      const userData = localStorage.getItem("userAccounts");
+      if (userData) {
+        setUser(JSON.parse(userData));
+      }
       const payload = {
         userAddress,
         storyAddress: "threaded_tales_stories",
         storyName: title,
         royaltyPercentage: royalty,
         content,
+        userId:user?.id,
+        title
       }
 
       const response = await axios.post('http://localhost:5000/api/create/', payload)

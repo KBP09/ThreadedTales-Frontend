@@ -148,9 +148,6 @@ export default function SignupPage() {
           </CardFooter>
         </Card>
       </div>
-      <div className="hidden lg:block fixed left-0 top-0 w-1/2 h-full">
-        <Image src="/images/signup-background.jpg" alt="Signup background" layout="fill" objectFit="cover" />
-      </div>
     </div>
   )
 }

@@ -43,11 +43,14 @@ export default function Page() {
           </Button>
         </div>
       </motion.section>
+      <h2 className="text-3xl font-bold mb-8 gradient-text">Trending Threads</h2>
       <TrendingThreads />
       <div className="mt-8">
+      <h2 className="text-3xl font-bold mb-8 gradient-text">Because you like sci-fi</h2>
       <TrendingThreads />
       </div>
       <div className="mt-8">
+      <h2 className="text-3xl font-bold mb-8 gradient-text">Because you like thriller</h2>
       <TrendingThreads />
       </div>
     </div>
