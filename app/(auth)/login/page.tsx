@@ -21,7 +21,7 @@ export default function LoginPage() {
   const { toast } = useToast()
   const router = useRouter()
 
-  // Show a toast when the page loads
+  
   useEffect(() => {
     toast({
       title: "Backend disconnected",
