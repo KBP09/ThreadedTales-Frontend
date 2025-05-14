@@ -30,7 +30,7 @@ export default function LoginPage() {
     })
     setTimeout(() => {
       router.push("/home")
-    }, 3000) // Delay before redirecting to home page
+    }, 3000) 
   }, [toast, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
